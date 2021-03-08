@@ -1,0 +1,25 @@
+<ion-tabs>
+  <ion-tab-bar  slot="bottom">
+    <ion-tab-button tab="dashboard">
+      <ion-icon name="grid-outline"></ion-icon>
+      <ion-label style="font-size: 8px;" >Dashboard</ion-label>
+    </ion-tab-button>
+    <ion-tab-button tab="deliveryrecord">
+      <ion-icon name="file-tray-full-outline"></ion-icon>
+      <ion-label style="font-size: 8px;" >Delivery</ion-label>
+    </ion-tab-button>
+    <ion-tab-button tab="camera">
+      <ion-icon name="scan-outline"></ion-icon>
+      <ion-label style="font-size: 8px;">QR Code</ion-label>
+    </ion-tab-button>
+    <ion-tab-button (click)="getnotification()" tab="notification">
+      <ion-icon name="notifications-outline"></ion-icon>
+      <!--<ion-badge >{{num_outbound_notification}}</ion-badge>-->
+      <ion-label style="font-size: 8px;" >Notification</ion-label>
+    </ion-tab-button>
+    <ion-tab-button tab="setting">
+      <ion-icon name="cog-outline"></ion-icon>
+      <ion-label style="font-size: 8px;" >Setting</ion-label>
+    </ion-tab-button>
+  </ion-tab-bar>
+</ion-tabs>

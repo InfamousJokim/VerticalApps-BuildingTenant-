@@ -1,0 +1,66 @@
+<ion-header [translucent]="true" >
+  <ion-toolbar>
+    <ion-title style="color: black;" class="text-center">Delivery Request</ion-title>
+    
+  </ion-toolbar>
+</ion-header>
+
+<ion-content> 
+
+  
+  
+  <mat-grid-list cols="1" rowHeight="6:1">
+      
+      <mat-grid-tile>
+        <ion-fab-button class="exit-button" color="secondary" icon-only fill="clear" routerLink="/tabs/dashboard">
+          <ion-icon style="color: black;" name="close-outline"></ion-icon>
+        </ion-fab-button>
+      </mat-grid-tile>
+      <mat-grid-tile>
+        <ion-fab-button class="button-size" >1</ion-fab-button>
+      </mat-grid-tile>
+      <mat-grid-tile>
+        <span style="color: black;" class="txt-center">Select Cart Type</span>
+      </mat-grid-tile>
+ 
+
+  </mat-grid-list>  
+  
+
+<ion-card>
+  <ion-card-content >
+    <ion-row>
+      <ion-col >
+        
+        <span>Double Column</span><br>
+        <img src="../../../assets/Images/cage.jpg">
+        <ion-checkbox ngControl="selected" [(ngModel)]="option1" (ionchange)="change1()"  [disabled]="option2 .valueOf(true)" mode="ios"  ></ion-checkbox>
+        
+      </ion-col>
+
+      <ion-col>
+        
+        <span>Full Column</span>
+        <img src="../../../assets/Images/cage.jpg">
+        <ion-checkbox [(ngModel)]="option2" (ionchange)="change2()"  [disabled]="option1 .valueOf(true)" mode="ios"  ></ion-checkbox>
+        
+
+      </ion-col>
+    </ion-row> 
+  </ion-card-content>
+</ion-card>
+
+ 
+
+
+  <mat-grid-list cols="1" rowHeight="4:1">
+    <mat-grid-tile>
+      
+      <ion-button  [disabled]="!option1.valueOf(false) && !option2.valueOf(false)" style="align-content: center;" routerLink="/form" (click)="getCart()">Next</ion-button>
+    </mat-grid-tile>
+  </mat-grid-list>
+
+
+  
+  
+</ion-content>

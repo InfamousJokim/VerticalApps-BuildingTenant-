@@ -1,0 +1,21 @@
+{
+    "deliveries": [
+        {
+            "ORN": "JI67FT56",
+            "Status": "In-progress"
+        },
+        {
+            "ORN": "KO56FT78",
+            "Status": "In-progress"
+        },
+        {
+            "ORN": "DR56UI89",
+            "Status": "Delivered"
+        },
+        {
+            "ORN": "JI67FT56",
+            "Status": "In-progress"
+        }
+        
+    ]
+}

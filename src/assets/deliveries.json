@@ -1,0 +1,21 @@
+{
+    "deliveries": [
+        {
+            "IRN": "JI67FT56",
+            "Status": "In-progress"
+        },
+        {
+            "IRN": "KO56FT78",
+            "Status": "In-progress"
+        },
+        {
+            "IRN": "DR56UI89",
+            "Status": "Delivered"
+        },
+        {
+            "IRN": "JI67FT56",
+            "Status": "In-progress"
+        }
+        
+    ]
+}

@@ -1,0 +1,47 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title class="text-center" >Notification</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  
+  <!--Getting the list of Outbound Delivery Status with the status of "Arrived at Building Tenant" & "Arrived at Depot Admin"-->
+  
+    <div  *ngFor="let outbound of UserDeliveryStatus ; let i = index " class="ion-padding">
+      <ion-list>
+        <ion-item-sliding>
+          
+            <ion-item>
+                 <div style="font-size: 40px;" class="ion-padding">
+                    <ion-icon name="mail-outline"></ion-icon>
+                  </div>
+                
+                  <div style="font-size: 10px;" >
+                    <ion-label> ORN : <br> 
+                      <u>{{outbound.orn}}</u>
+                    </ion-label>
+                  </div>
+                  <ion-row>
+                    <ion-label style="margin-left: 15%; width: 250px;" class="delivery_status" > Delivery Status : <br>{{outbound.delivery_status}}</ion-label>
+                  </ion-row>
+                  
+                
+            </ion-item>
+          
+      
+          <ion-item-options side="end">
+            <ion-item-option (click)="HiddenNotification(item)" color="danger" style="font-size: 30px;"><ion-icon name="trash-outline"></ion-icon></ion-item-option>
+          </ion-item-options>
+        </ion-item-sliding>
+      </ion-list>
+    </div>
+  
+  
+
+
+</ion-content>
