@@ -27,6 +27,13 @@ const routes: Routes = [
         path: '', 
         loadChildren: () => import("../pages/camera/camera.module").then(m => m.CameraPageModule)
       }]
+    },
+    {
+      path: 'qrcode', 
+      children: [{
+        path: '', 
+        loadChildren: () => import("../pages/camera/qrcode/qrcode.module").then(m => m.QrcodePageModule)
+      }]
     }, {
       path: 'notification', 
       children: [{

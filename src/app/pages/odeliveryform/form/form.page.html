@@ -46,7 +46,7 @@
 
         <ion-item  color="seondary">
           <ion-label color="tertiary">Target Pickup Date</ion-label>
-          <ion-datetime [(ngModel)]="Date" formControlName="date" style="color: black;" displayFormat="DDDD MMM D, YYYY"  value="1990-02-19" placeholder="Select Date"></ion-datetime>
+          <ion-datetime [(ngModel)]="Date" formControlName="date" style="color: black;" displayFormat="DDDD MMM D, YYYY"   placeholder="Select Date"></ion-datetime>
         </ion-item>
         <div *ngFor="let error of errorMessages.date">
           <ng-container *ngIf="date.hasError(error.type) && (date.dirty || date.touched)">

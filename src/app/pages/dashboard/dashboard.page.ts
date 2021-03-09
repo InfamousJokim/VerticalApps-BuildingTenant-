@@ -96,7 +96,6 @@ export class DashboardPage  implements OnInit {
 
   }
 
-  public polling: any;
 
 
   //Counting Inbound/Outbound Deliveries

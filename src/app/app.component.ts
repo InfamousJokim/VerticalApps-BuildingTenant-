@@ -8,6 +8,7 @@ import { Subscription } from 'rxjs';
 import { AppSettings } from '../app/app.settings'
 import { ELocalNotificationTriggerUnit, LocalNotifications } from '@ionic-native/local-notifications/ngx';
 import { Outbound_Delivery } from './interface';
+import { style } from '@angular/animations';
 
 @Component({
   selector: 'app-root',
@@ -105,16 +106,12 @@ export class AppComponent {
 
 
   
-
+  //Connection to MQTT
   connect(config: IMqttServiceOptions ): void {
-    //if (this.subscriptionLive == undefined) {
+
       this._mqtt.connect(config);
-      
-      console.log(JSON.parse(localStorage.getItem('UpdateDataBT')).orn);
-      
-      
-   // } 
-    
+      //console.log(JSON.parse(localStorage.getItem('UpdateDataBT')).orn);
+
   }
 
 
@@ -193,6 +190,7 @@ export class AppComponent {
       });
     }
 
+    //Notification when 
     if(localStorage.getItem('mqttMessage') == "Handled Over to Logistic Partner"){
       this.localNotifications.schedule({
         id: 1,
@@ -206,14 +204,16 @@ export class AppComponent {
       });
     }
 
+    //Notification when "Loaded" Cart has arrived at the Building Tennat (Inbound Flow)
     if(localStorage.getItem('mqttMessage') == "Delivery Arrived"){
       this.localNotifications.schedule({
         id: 1,
         text: 'Delivery Record : '+ JSON.parse(localStorage.getItem('UpdateDataInbound')).irn  ,
         sound: 'file://sound.mp3',
-        data: { mydata : 'Delivery Status : ' + localStorage.getItem('mqttMessage')} , 
+        data: { mydata : 'Hello! Your Parcels have arrived at your doorstep! Please retrieve the Parcels '} , 
         trigger : { in : 5 , unit : ELocalNotificationTriggerUnit.SECOND}, 
         foreground : true 
+        
         
         
       });
@@ -230,6 +230,7 @@ export class AppComponent {
       subHeader : sub , 
       message : msg , 
       buttons : ['Ok'],
+       
       
     }).then(alert => alert.present());
   }

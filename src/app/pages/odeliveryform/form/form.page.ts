@@ -3,6 +3,7 @@ import { Component, OnInit , OnDestroy} from '@angular/core';
 import { FormBuilder,FormGroup,Validator, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { OdeliveryformService } from '../odeliveryform.service';
+import * as moment from 'moment';
 
 
 
@@ -90,8 +91,8 @@ export class FormPage implements OnInit{
   //declaring for passing over 
   formData = {}
   parcel : string ; 
-  Date: Date; 
-  Time  : Date; 
+  Date : string;
+  Time  : string; 
   log_partner : string; 
   Add : string ; 
 
@@ -114,12 +115,13 @@ export class FormPage implements OnInit{
     }
     this.OD.SendData(this.formData);
   }
-
+  
   
 
   ngOnInit(){
     this.inputForm.valueChanges.subscribe(console.log)
-
+    this.Date = new Date().toISOString();
+    this.Time = new Date().toISOString();
     
   }
 
