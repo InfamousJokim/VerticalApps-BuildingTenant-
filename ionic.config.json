@@ -1,0 +1,8 @@
+{
+  "name": "vertver1",
+  "integrations": {
+    "capacitor": {},
+    "cordova": {}
+  },
+  "type": "angular"
+}

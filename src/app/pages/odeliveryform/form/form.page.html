@@ -1,0 +1,131 @@
+
+<ion-header [translucent]="true" >
+  <ion-toolbar>
+    <ion-title class="text-center" style="color: black;">Delivery Request</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+
+  <div class="ion-padding">
+
+    <mat-grid-list cols="1" rowHeight="6:1">
+        <mat-grid-tile>
+          <ion-fab-button class="exit-button" color="secondary" icon-only fill="clear" routerLink="/tabs/dashboard">
+            <ion-icon style="color: black;" name="close-outline"></ion-icon>
+          </ion-fab-button>
+        </mat-grid-tile>
+        <mat-grid-tile>
+          <ion-fab-button class="button-size" >1</ion-fab-button>
+          <div style="color: black;">------------------------</div>
+          <ion-fab-button class="button-size" >2</ion-fab-button>
+        </mat-grid-tile>
+        <mat-grid-tile>
+          <span style="color: black;" class="txt-center">Input Delivery Details</span>
+        </mat-grid-tile>
+    </mat-grid-list>
+
+<ion-card>
+
+  <ion-card-content class="card-size" padding>
+    <form [formGroup]="inputForm" (ngSubmit)="submit()" >
+      <div>
+        <ion-label position="floating">Number of Packages/Parcels : </ion-label><br>
+        <input [(ngModel)]="parcel" class="input-size" formControlName="package" type="text">
+        <div *ngFor="let error of errorMessages.package">
+          <ng-container *ngIf="package.hasError(error.type) && (package.dirty || package.touched)">
+            <small class="error-message">{{error.message}}</small>
+          </ng-container>
+        </div>
+
+        <br>
+        <br>
+
+        <ion-label position="floating">Select Delivery Date and Time: </ion-label>
+
+        <ion-item  color="seondary">
+          <ion-label color="tertiary">Target Pickup Date</ion-label>
+          <ion-datetime [(ngModel)]="Date" formControlName="date" style="color: black;" displayFormat="DDDD MMM D, YYYY"   placeholder="Select Date"></ion-datetime>
+        </ion-item>
+        <div *ngFor="let error of errorMessages.date">
+          <ng-container *ngIf="date.hasError(error.type) && (date.dirty || date.touched)">
+            <small class="error-message">{{error.message}}</small>
+          </ng-container>
+        </div>
+        
+        <ion-item  color="secondary">
+          <ion-label color="tertiary">Target Pickup Time</ion-label>
+          <ion-datetime [(ngModel)]="Time" formControlName="time" style="color: black;" displayFormat="h:mm A" value="1990-02-19T07:43Z" placeholder="Select Time"></ion-datetime>
+        </ion-item>
+        <div *ngFor="let error of errorMessages.time">
+          <ng-container *ngIf="time.hasError(error.type) && (time.dirty || time.touched)">
+            <small class="error-message">{{error.message}}</small>
+          </ng-container>
+        </div>
+        <br>
+        <br>
+
+        <ion-item>
+          <ion-label>Logistic Partner</ion-label>
+          <ion-select interface="popover"  [(ngModel)]= "log_partner" formControlName="logistic_partner">
+          <ion-select-option value="DHL">DHL</ion-select-option>
+          <ion-select-option value="NinjaVan">NinjaVan</ion-select-option>
+          <ion-select-option value="UParcel">UParcel</ion-select-option>
+          </ion-select>
+          </ion-item>
+        <div *ngFor="let error of errorMessages.logistic_partner">
+          <ng-container *ngIf="logistic_partner.hasError(error.type) && (logistic_partner.dirty || logistic_partner.touched)">
+            <small class="error-message">{{error.message}}</small>
+          </ng-container>
+        </div>
+        
+    <!-- <ion-row style="margin-left: 40px;">
+      <ion-col>
+        <ion-fab-button icon-only fill="clear" >
+          <img class="img-size" src="../../../assets/Images/dhl.jpg">
+        </ion-fab-button> 
+      </ion-col>
+  
+      <ion-col>
+        <ion-fab-button icon-only fill="clear">
+          <img class="img-size" src="../../../assets/Images/ninjavan.jpg">
+        </ion-fab-button>
+      </ion-col>
+
+      <ion-col>
+        <ion-fab-button icon-only fill="clear">
+          <img class="img-size" src="../../../assets/Images/uparcel.jpg">
+        </ion-fab-button>
+      </ion-col>
+    </ion-row> -->
+    <br> 
+    
+    
+    <!-- <div *ngFor="let error of errorMessages.add">
+      <ng-container *ngIf="add.hasError(error.type) && (add.dirty || add.touched)">
+        <small class="error-message">{{error.message}}</small>
+      </ng-container>
+    </div> -->
+    </div>
+    </form>
+
+    <ion-label class="parcel" position="floating">Additional Information</ion-label><br>
+    <input [(ngModel)]="Add"   type="text">
+  </ion-card-content>
+
+
+  
+</ion-card>
+
+
+<mat-grid-list cols="1" rowHeight="4:1">
+  <mat-grid-tile>
+    <ion-button style="align-content: center;" routerLink="/requestdelivery">Back</ion-button>
+    <ion-button [disabled]="!inputForm.valid" (click)="getDataFromUser()" type="submit" expand="block" style="align-content: center;" routerLink="/confirmation">Next</ion-button>
+  </mat-grid-tile>
+</mat-grid-list>
+</div>
+
+</ion-content>
+

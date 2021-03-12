@@ -1,0 +1,61 @@
+<ion-header [translucent]="true" class="mobile-header">
+  <ion-toolbar>
+    <ion-title class="text-center" style="color: black;">
+      Vertical App
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+
+  <ion-grid>
+    <ion-row>
+    <ion-col class="image_title">
+      <div class="app-title-container">
+        <span class="web-app-name">Vertical App</span>
+      </div>
+    </ion-col>
+
+    <ion-col class="login">
+      <div class="title">
+        <span class="login_title" style="color: black;">Login</span><br><br>
+        
+    </div>
+
+    <form [formGroup]="loginForm" (ngSubmit)="submit()">
+        <div>
+          <ion-label style="color: black;" position="floating">Email Address : </ion-label><br>
+        <input [(ngModel)]="log.username" formControlName="email" type="text" placeholder="@abc.gmail.com"><br><br>
+        <div class="errormessages" *ngFor="let error of errorMessages.email">
+          <ng-container *ngIf="email.hasError(error.type) && (email.dirty || email.touched)">
+            <small class="error-message">{{error.message}}</small>
+          </ng-container>
+        </div>
+        
+        <ion-label style="color: black;" position="floating">Password : </ion-label><br>
+        <input [(ngModel)]="log.password" formControlName="password" type="text" placeholder="password" type="password">
+        <div class="errormessages" *ngFor="let error of errorMessages.password">
+          <ng-container *ngIf="password.hasError(error.type) && (password.dirty || password.touched)">
+            <small class="error-message">{{error.message}}</small>
+          </ng-container>
+        </div>
+
+
+        <div class="login-button" >
+          <button class="login-submit" (click)="Login()" >Log in</button>
+        </div>
+        
+        </div>
+
+    </form>
+    <div *ngIf="authenticated==='false'" class="error_msg">Username/Password is wrong</div>
+
+    
+
+
+    </ion-col>
+    </ion-row>
+  </ion-grid>
+
+
+</ion-content>

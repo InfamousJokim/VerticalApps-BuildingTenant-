@@ -1,0 +1,112 @@
+<ion-header [translucent]="true" >
+  <ion-toolbar >
+    <ion-title class="text-center" style="color: black;">Dashboard</ion-title>
+    
+    
+  </ion-toolbar>
+  
+</ion-header>
+
+<ion-content>
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+  
+      <ion-fab vertical="bottom" horizontal="end" style="margin-bottom: px;" slot="fixed">
+        <ion-fab-button routerLink="/requestdelivery" >
+          <ion-icon name="add-circle-outline"></ion-icon>
+        </ion-fab-button>
+      </ion-fab>
+
+      <ion-row>
+        <ion-col>
+        
+
+          <ion-card>
+            <ion-card-content style="text-align: left;">
+              <ion-card-header >
+                <span class="big-text">Inbound <br>Delivery</span>
+              </ion-card-header>
+
+              <ion-card-subtitle class="text-center">
+                <span class="big-number">{{num_inbound_deliveries}}</span> 
+              </ion-card-subtitle>
+              <span class="small-text">Deliveries Today</span>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+        <ion-col>
+          <ion-card>
+            <ion-card-content>
+              <ion-card-header style="text-align: left;">
+                <span class="big-text">Outbound <br>Delivery</span>
+              </ion-card-header>
+
+              <ion-card-subtitle class="text-center">
+                <span class="big-number">{{num_outbound_deliveries}}</span> 
+              </ion-card-subtitle>
+              <span class="small-text">Deliveries Today</span>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+
+
+      
+      <ion-segment [(ngModel)]="deliveries" value="inbound">
+    
+        <ion-segment-button value="inbound">
+          Inbound Deliveries
+        </ion-segment-button>
+        <ion-segment-button value="outbound">
+          Outbound Deliveries
+        </ion-segment-button>
+      </ion-segment>
+
+      <div [ngSwitch]="deliveries"> 
+        <div class="ion-padding" *ngSwitchCase="'inbound'">
+          <!--Inbound Table-->
+         <ngx-datatable 
+         class="bootstrap"
+         [limit]="10" 
+         [rows]="UserInboundDeliveryRecords" 
+         [rowHeight]="50" 
+         [columns]="inboundColumns"
+         [columnMode]="'force'" 
+         [sortType]="'multi'" 
+         [headerHeight]="50" 
+         [footerHeight]="50"
+         [scrollbarH]="true"
+         [scrollbarV]="true">
+         
+         
+         </ngx-datatable>
+        </div>
+
+          <!--Outbound Table-->
+          <div class="ion-padding" *ngSwitchCase="'outbound'">
+            <ngx-datatable 
+            class="bootstrap"
+            [limit]="10" 
+            [rows]="UserOutboundDeliveryRecords" 
+            [rowHeight]="50" 
+            [columns]="outboundColumns"
+            [columnMode]="'force'" 
+            [sortType]="'multi'" 
+            [headerHeight]="50" 
+            [footerHeight]="50"
+            [scrollbarH]="true"
+            [scrollbarV]="true">
+            
+            </ngx-datatable>
+        </div>
+      </div>
+    
+
+    
+
+  
+  
+
+</ion-content>
