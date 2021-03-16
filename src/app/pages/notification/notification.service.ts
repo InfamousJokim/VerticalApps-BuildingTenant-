@@ -31,17 +31,19 @@ export class NotificationService {
 
 
   //GET objects from Notification Table
-  async GetStatusNotificationData(){
+  /**async GetStatusNotificationData(){
     return await this.http.get("http://52.74.132.238/api/outbound_deliveries/getnotification/", { headers: new HttpHeaders({ 
       'Content-Type': 'application/json',
       'Authorization': 'Bearer ' + (this.cookieService.get('session'))
     }) 
   }).toPromise();
-  }
+  }*/
 
   //Get Outbound Pin API
-  async GetOutboundPinData(){
-    return await this.http.get("http://52.74.132.238/api/outbound_deliveries/pin/" ,  { headers : new HttpHeaders({
+  async GetOutboundPin(){
+    let orn = JSON.parse(localStorage.getItem("SelectedORN")).orn
+    console.log(orn);
+    return await this.http.get("http://52.74.132.238/api/outbound_deliveries/pin/" + orn , { headers : new HttpHeaders({
       'Content-Type': 'application/json',
       'Authorization': 'Bearer ' + (this.cookieService.get('session'))
     })
@@ -49,7 +51,7 @@ export class NotificationService {
   }
 
   //Get Inbound Pin API 
-    async GetInboundPinData(){
+    async GetInboundPin(){
       return await this.http.get("http://52.74.132.238/api/inbound_deliveries/pin/" , { headers : new HttpHeaders({
         'Content-Type': 'application/json',
         'Authorization': 'Bearer ' + (this.cookieService.get('session'))

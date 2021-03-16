@@ -2,7 +2,7 @@ import { Component, OnInit, Renderer2 } from '@angular/core';
 import { ELocalNotificationTriggerUnit, LocalNotifications } from '@ionic-native/local-notifications/ngx';
 import { AlertController, Platform, PopoverController } from '@ionic/angular';
 import { AppSettings } from '../../app.settings';
-import { Inbound_Delivery, Outbound_Delivery , Notifications} from 'src/app/interface'; 
+import { Inbound_Delivery, Outbound_Delivery , Notifications, Outbound} from 'src/app/interface'; 
 import { NotificationService } from './notification.service';
 import { DeliveryrecordService } from '../deliveryrecord/deliveryrecord.service';
 import { SettingPage } from '../setting/setting.page';
@@ -106,17 +106,8 @@ export class NotificationPage implements OnInit{
       
     })
 
-    //Getting Inbound Pin number 
-    this.ns.GetOutboundPinData().then((res : any)=> {
-      this.outboundPin = res['result']['list'];
-      console.log(this.outboundPin);
-    })
 
-    //Getting Inbound Pin number 
-    this.ns.GetInboundPinData().then((res : any) => {
-      this.inboundPin = res['result']['list'];
-      console.log(this.inboundPin);
-    })
+    
 
 
   }
@@ -127,28 +118,29 @@ export class NotificationPage implements OnInit{
   }
 
   //Function to show the pin on the frontend 
-  ShowPin(UserDeliveryStatus){
-    localStorage.setItem("GetPinData" , JSON.stringify(UserDeliveryStatus));
-    this.presentPopover(UserDeliveryStatus);
+  GetData(outbound : Outbound_Delivery){
+    localStorage.setItem("SelectedORN" , JSON.stringify(outbound));
+    this.presentPopover(outbound);
   }
 
-  //Show Pin to Cart as a Popover
+  //generating a Popover
   async presentPopover(outbound: any) {
 
 
     const popover = await this.popoverController.create({
       component: PinComponent,
-      cssClass: 'custom-Popover',
+      cssClass: 'my-custom-class',
       event: outbound,
       translucent: true,
       
     });
 
-    console.log(outbound);
     return await popover.present();
     
     
   }
+
+  
 
   //Get Notification items that user has created 
   async GetUserObjects(){
@@ -156,7 +148,7 @@ export class NotificationPage implements OnInit{
     for(let i = 0 ; i < this.outbounds.length ; i ++){
       if(this.outbounds[i].tenant_name === JSON.parse(localStorage.getItem("Display_Name"))){
         this.UserDeliveryObjects.push(this.outbounds[i]);
-        console.log(this.UserDeliveryObjects);
+        
       }
     }
   }
@@ -173,9 +165,10 @@ export class NotificationPage implements OnInit{
       || this.UserDeliveryObjects[i].delivery_status === "Delivery Arrived"){
         this.UserDeliveryStatus.push(this.UserDeliveryObjects[i]);
 
-        console.log(this.UserDeliveryStatus);
+        
       }
     }
+    console.log(this.UserDeliveryStatus);
   }
 
   
