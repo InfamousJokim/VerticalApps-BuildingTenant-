@@ -97,6 +97,7 @@ export class LoginPage implements OnInit {
     
     await this.loginService.robot_manager_token(this.log).then(res =>{
       this.robotmanager_token = res['token'];
+      
     })
       .catch(err =>{
         this.status = err['error']

@@ -7,8 +7,9 @@ import { CookieService } from 'ngx-cookie-service';
 import { Router } from '@angular/router';
 import { ParamList , Outbound_Delivery , Inbound_Delivery } from '../../interface';
 import { AppSettings } from '../../app.settings';
-import { Subscription } from 'rxjs';
-import { IMqttMessage, MqttService } from 'ngx-mqtt';
+import { DatePipe } from '@angular/common';
+import { AlertController, PopoverController } from '@ionic/angular';
+import { MoreInfoPage } from '../deliveryrecord/more-info/more-info.page';
 
 export interface Data {
   deliveries: string;
@@ -22,32 +23,31 @@ export interface Data {
   selector: 'app-dashboard',
   templateUrl: './dashboard.page.html',
   styleUrls: ['./dashboard.page.scss'],
-  providers : [AppSettings] , 
+  providers : [AppSettings , AlertController , DashboardService , DatePipe] , 
   encapsulation: ViewEncapsulation.None
 })
 export class DashboardPage  implements OnInit {
 
 
-  //Getting inbound and outbound status
-  public inbounddata : Object;
-  public outbounddata : Object;
 
   public inbounds : Inbound_Delivery; 
   public outbounds : Outbound_Delivery;
+  public outbound : any;
+  public inbound : any ; 
 
   inboundColumns:any = {};
   outboundColumns: any = {};
   public inboundrows : any; 
   public outboundrows : any;  
   
-  public UserOutboundDeliveryRecords : any[] = [] ; 
-  public UserInboundDeliveryRecords : any[] = [] ; 
+  public OutboundUserDeliveryRecords : any[] = [] ; 
+  public InboundUserDeliveryRecords : any[] = [] ; 
 
   usersRows : any;
   paramlist= new ParamList();
 
 
-  constructor( private http: HttpClient , private ds : DashboardService , private cookieservice:CookieService  , private router : Router , private appSettings : AppSettings ) {
+  constructor( private http: HttpClient ,  private datepipe: DatePipe , private ds : DashboardService , private cookieservice:CookieService  , private router : Router , private appSettings : AppSettings , public popoverController : PopoverController ) {
     this.paramlist.PageNo = 1;
     this.paramlist.PageSize = 10;
     this.paramlist.SearchColumn = "userName";
@@ -65,15 +65,15 @@ export class DashboardPage  implements OnInit {
     await this.user_list();
     
     await this.ds.getInboundStatus().then((res: any) =>{
-      this.inboundrows = res['result']['list'];
-      console.log(this.inboundrows);
+      this.inbound = res['result']['list'];
+      console.log(this.inbound);
       this.GetInboundUserDelivery();
      })
 
     
     await this.ds.getOutboundStatus().then((res: any) =>{
-      this.outboundrows = res['result']['list'];
-      console.log(this.outboundrows);
+      this.outbound = res['result']['list'];
+      console.log(this.outbound);
       this.GetOutboundUserDelivery();
     })  
 
@@ -98,7 +98,7 @@ export class DashboardPage  implements OnInit {
 
 
 
-  //Counting Inbound/Outbound Deliveries
+  //Getting total number of Inbound/Outbound Deliveries
   public num_inbound_deliveries: number;
   public num_outbound_deliveries: number;
 
@@ -107,21 +107,38 @@ export class DashboardPage  implements OnInit {
 
      async get_deliveries(){
       await delay(200);
-      if(this.UserInboundDeliveryRecords !== null){
-        
-       this.num_inbound_deliveries = Object.keys(this.UserInboundDeliveryRecords).length;
+      if(this.InboundUserDeliveryRecords !== null){
+       this.num_inbound_deliveries = Object.keys(this.InboundUserDeliveryRecords).length;
       }
 
       await delay(200);
-      if(this.UserOutboundDeliveryRecords !== null){
-       this.num_outbound_deliveries = Object.keys(this.UserOutboundDeliveryRecords).length;
+      if(this.OutboundUserDeliveryRecords !== null){
+       this.num_outbound_deliveries = Object.keys(this.OutboundUserDeliveryRecords).length;
       }
-
-      
-
      }
 
-     
+
+     getData(outbounds : Outbound_Delivery){
+       console.log(outbounds);
+      localStorage.setItem("outbound_delivery", JSON.stringify(outbounds));
+      this.presentPopover(outbounds);
+    }
+
+    async presentPopover(outbounds: any){
+
+
+      const popover = await this.popoverController.create({
+        component: MoreInfoPage,
+        cssClass: 'my-custom-class',
+        event: outbounds,
+        translucent: true,
+      });
+  
+      console.log(outbounds);
+      return popover.present();
+      
+      
+    }
 
     //Logout
     Logout(){
@@ -157,23 +174,21 @@ export class DashboardPage  implements OnInit {
     }
 
     GetOutboundUserDelivery(){
-      
-      this.UserOutboundDeliveryRecords = [];
-      
-      for(let i = 0 ; i < this.outboundrows.length ; i++){
-        if(this.outboundrows[i].tenant_name === JSON.parse(localStorage.getItem("Display_Name"))){
-          this.UserOutboundDeliveryRecords.push(this.outboundrows[i]);
-          //console.log(this.UserOutboundDeliveryRecords);
+      this.OutboundUserDeliveryRecords = [];
+      for(let i = 0 ; i < this.outbound.length ; i++){
+        if(this.outbound[i].tenant_name === JSON.parse(localStorage.getItem("Display_Name"))){
+          this.OutboundUserDeliveryRecords.push(this.outbound[i]);
+          console.log(this.OutboundUserDeliveryRecords);
         }
       }
     }
 
     GetInboundUserDelivery(){
-      this.UserInboundDeliveryRecords = [];
-      for(let i = 0 ; i < this.inboundrows.length ; i++){
-        if(this.inboundrows[i].tenant_name === JSON.parse(localStorage.getItem("Display_Name"))){
-          this.UserInboundDeliveryRecords.push(this.inboundrows[i]);
-          console.log(this.UserInboundDeliveryRecords);
+      this.InboundUserDeliveryRecords = [];
+      for(let i = 0 ; i < this.inbound.length ; i++){
+        if(this.inbound[i].tenant_name === JSON.parse(localStorage.getItem("Display_Name"))){
+          this.InboundUserDeliveryRecords.push(this.inbound[i]);
+          console.log(this.InboundUserDeliveryRecords);
         }
       }
     }

@@ -1,31 +1,3 @@
-.big-buttons{
-    width: 150px;
-    height: 150px;
-    margin-left: 15px;
-
-}
-
-.bigfont{
-    font-size: 40px;
-}
-
-.big-text{
-    font-size: 15px;
-}
-
-.big-number{
-    font-size: 50px;
-    
-}
-
-.small-text{
-    font-size: 8;
-}
-
-.OutboundCard{
-    font-size: 20px;
-}
-
 .left{
     text-align: left;
 }
@@ -40,8 +12,7 @@
 }
 
 .cart-image{
-    height: 100%;
-    width: 100%;
+    size : 50px;
 
 }
 
@@ -58,7 +29,7 @@
 
 .heading{
     color: black;
-    font-size: 14px;
+    font-size: px;
 }
 
 .center{
@@ -68,4 +39,9 @@
 .button-position{
     
     margin-top: 100px;
+    margin-left: 40%;
+}
+
+.text-style{
+    font-size: 11px;
 }

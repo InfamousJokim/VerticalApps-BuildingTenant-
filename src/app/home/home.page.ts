@@ -40,7 +40,7 @@ export class HomePage implements OnInit {
 
   async get_deliveries(){
     await delay(200);
-    await this.GetNotificationNum();
+    //await this.GetNotificationNum();
     console.log(this.UserDeliveryRecords);
     if(this.UserDeliveryRecords !== null){
       this.num_outbound_notification = this.UserDeliveryRecords.length;
@@ -53,7 +53,7 @@ export class HomePage implements OnInit {
 
   }
 
-  async GetNotificationNum(){
+  /**async GetNotificationNum(){
     this.UserDeliveryRecords = [];
     
     for(let i = 0 ; i < this.outbounds.length() ; i ++){
@@ -65,7 +65,7 @@ export class HomePage implements OnInit {
     }
     
     console.log(this.UserDeliveryRecords);
-  }
+  }*/
 
 
   async ngOnInit(){
@@ -75,7 +75,7 @@ export class HomePage implements OnInit {
     this.HS.GetOutboundData().then((res : any) => {
       this.outbounds = res['result']['list'];
       console.log(this.outbounds);
-      this.GetNotificationNum();
+      //this.GetNotificationNum();
     })
     
     //Get the list of inbound deliveries 

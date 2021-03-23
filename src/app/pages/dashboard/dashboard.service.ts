@@ -29,7 +29,7 @@ export class DashboardService {
 
 
   
-
+  //Getting the list of Inbound Delivery Request made 
   async getInboundStatus() {
     return await this.http.get<Inbound_Delivery>("http://52.74.132.238/api/inbound_deliveries", { headers: new HttpHeaders({ 
       'Content-Type': 'application/json',
@@ -39,7 +39,7 @@ export class DashboardService {
      
   }
 
-  
+  //Getting the list of Outbound Delivery Request made 
   async getOutboundStatus() {
     return await this.http.get<Outbound_Delivery>("http://52.74.132.238/api/outbound_deliveries", { headers: new HttpHeaders({ 
       'Content-Type': 'application/json',
@@ -49,12 +49,34 @@ export class DashboardService {
      
   }
 
+  
+
+  //Getting the list of users 
   async get_users(ParamList : ParamList) {
 ;    return await this.http.post<ParamList>("http://52.74.132.238/api/user/list", ParamList, { headers: new HttpHeaders({ 
       'Content-Type': 'application/json',
       'Authorization': 'Bearer ' + (this.cookieService.get('session'))
     }) }).toPromise()
 
+  }
+
+   //Cancel Delivery from database
+   UpdateOutbound(outbound: Outbound_Delivery){
+    return this.http.put<Outbound_Delivery>("http://52.74.132.238/api/cancel/outbound_delivery", outbound, { headers: new HttpHeaders({ 
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + (this.cookieService.get('session'))
+    }) 
+  }).toPromise();
+  }
+
+  //update cart status
+  UpdateCart(cart_assigned : string ){
+    return this.http.put<string>("http://52.74.132.238/api/carts/"+cart_assigned, "available", { headers: new HttpHeaders({ 
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + (this.cookieService.get('session'))
+    }) 
+  }).toPromise(); 
+     
   }
 
   //Get notification data 

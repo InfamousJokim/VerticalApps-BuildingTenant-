@@ -7,6 +7,7 @@ import { NotificationService } from './notification.service';
 import { DeliveryrecordService } from '../deliveryrecord/deliveryrecord.service';
 import { SettingPage } from '../setting/setting.page';
 import { PinComponent } from './pin/pin.component';
+import { InboundPinComponent } from './inbound-pin/inbound-pin.component';
 
 
 @Component({
@@ -43,11 +44,14 @@ export class NotificationPage implements OnInit{
   public socketSubscribe : any ; 
   public notificationData : any ;
 
-  public UserDeliveryObjects : any[] = [] ;
-  public UserDeliveryStatus : any[] = [] ;
+  public UserOutboundDeliveryObjects : any[] = [] ;
+  public UserOutboundDeliveryStatus : any[] = [] ;
+
+  public UserInboundDeliveryObjects : any[] = [] ;
+  public UserInboundDeliveryStatus : any[] = [] ;
 
   //Both the inbound and outbound array 
-  public CombinedArray : any[] = [];
+  public CombinedDeliveryRequest : any ;
 
   constructor(private SettingComponent : SettingPage ,private render : Renderer2 , private localNotifications : LocalNotifications , private plt : Platform , private alertCtrl : AlertController , private NS : NotificationService , private appSettings : AppSettings , private ds : DeliveryrecordService , private ns : NotificationService , public popoverController : PopoverController){
     
@@ -93,16 +97,16 @@ export class NotificationPage implements OnInit{
     this.ds.getOutboundStatus().then((res: any) =>{
       this.outbounds = res['result']['list'];
       console.log(this.outbounds);
-      this.GetUserObjects();
-      this.GetNeededStatus();
+      this.GetOutboundUserObjects();
+      this.GetOutboundNeededStatus();
     })  
 
     //Calling API to get objects in Inbound Delivery Table
     this.ds.getInboundStatus().then((res : any) => {
       this.inbounds = res['result']['list'];
       console.log(this.inbounds);
-      this.GetUserObjects();
-      this.GetNeededStatus();
+      this.GetInboundUserObjects();
+      this.GetInboundNeededStatus();
       
     })
 
@@ -117,58 +121,112 @@ export class NotificationPage implements OnInit{
     await this.ngOnInit();
   }
 
-  //Function to show the pin on the frontend 
-  GetData(outbound : Outbound_Delivery){
-    localStorage.setItem("SelectedORN" , JSON.stringify(outbound));
-    this.presentPopover(outbound);
+  //Selecting Outbound Data for Pin 
+  GetOutboundData(outbound : Outbound_Delivery ){
+      console.log(outbound);
+      localStorage.setItem("SelectedORN" , JSON.stringify(outbound));
+      this.presentOutboundPopover(outbound);
+   
   }
 
-  //generating a Popover
-  async presentPopover(outbound: any) {
+  //Selecting Inbound Data for Pin 
+  GetInboundData(inbound: Inbound_Delivery){
+    console.log(inbound);
+    localStorage.setItem("SelectedIRN" , JSON.stringify(inbound));
+    this.presentInboundPopover(inbound)
+  }
+
+  //generating a Outbound Popover
+
+  currentPopover = null ; 
+  async presentOutboundPopover(outbound: any ) {
 
 
-    const popover = await this.popoverController.create({
+    const Outboundpopover = await this.popoverController.create({
       component: PinComponent,
       cssClass: 'my-custom-class',
       event: outbound,
       translucent: true,
       
+      
     });
 
-    return await popover.present();
-    
+    this.currentPopover = Outboundpopover ; 
+    return await Outboundpopover.present();
     
   }
 
   
+  //Generating a Inbound Popover 
+  async presentInboundPopover(inbound : any){
+    
+    const Inboundpopover = await this.popoverController.create({
+      component : InboundPinComponent , 
+      cssClass : 'my-custom-class' , 
+      event : inbound , 
+      translucent : true , 
+      
+      
+    }); 
 
-  //Get Notification items that user has created 
-  async GetUserObjects(){
-    this.UserDeliveryObjects = [];
-    for(let i = 0 ; i < this.outbounds.length ; i ++){
-      if(this.outbounds[i].tenant_name === JSON.parse(localStorage.getItem("Display_Name"))){
-        this.UserDeliveryObjects.push(this.outbounds[i]);
-        
+    return await Inboundpopover.present();
+
+  }
+  
+    
+
+
+  //Get Inbound Notification items from current user only 
+  async GetInboundUserObjects(){
+    this.UserInboundDeliveryObjects = [];
+    for(let i = 0 ; i < this.inbounds.length ; i ++){
+      if(this.inbounds[i].tenant_name === JSON.parse(localStorage.getItem("Display_Name"))){
+        this.UserInboundDeliveryObjects.push(this.inbounds[i]);
       }
     }
+    console.log(this.inbounds);
   }
 
-  //Get only 3 Status to be displayed to user 
-  // "Cart Arrived at Building Tenant" || "Cart Arrived at Depot Admin" || "Handled Over to Logistic Partner" || "Delivery Arrived"(Inbound Flow)
-  // * Might need to split the content up by inbound and outbound 
-  GetNeededStatus(){
-    this.UserDeliveryStatus = [];
-    for(let i = 0 ; i < this.UserDeliveryObjects.length ; i ++){
-      if(this.UserDeliveryObjects[i].delivery_status === "Cart Arrived at Building Tenant" 
-      || this.UserDeliveryObjects[i].delivery_status === "Cart Arrived at Depot Admin"  
-      || this.UserDeliveryObjects[i].delivery_status === "Handled Over to Logistic Partner" 
-      || this.UserDeliveryObjects[i].delivery_status === "Delivery Arrived"){
-        this.UserDeliveryStatus.push(this.UserDeliveryObjects[i]);
+  GetInboundNeededStatus(){
+    this.UserInboundDeliveryStatus = [];
+    for(let i = 0 ; i < this.UserInboundDeliveryObjects.length ; i ++){
+      if(this.UserInboundDeliveryObjects[i].delivery_status === "Delivery Arrived" ){
+        this.UserInboundDeliveryStatus.push(this.UserInboundDeliveryObjects[i]);
 
         
       }
     }
-    console.log(this.UserDeliveryStatus);
+    console.log(this.UserInboundDeliveryStatus);
+  }
+
+
+  //Get Outbound Notification items from current user only 
+  async GetOutboundUserObjects(){
+    this.UserOutboundDeliveryObjects = [];
+    for(let i = 0 ; i < this.outbounds.length ; i ++){
+      if(this.outbounds[i].tenant_name === JSON.parse(localStorage.getItem("Display_Name"))){
+        this.UserOutboundDeliveryObjects.push(this.outbounds[i]);
+        
+      }
+    }
+    console.log(this.inbounds);
+  }
+
+  //Get 4 Status to be displayed to user 
+  // "Cart Arrived at Building Tenant" || "Cart Arrived at Depot Admin" || "Handled Over to Logistic Partner" || "Delivery Arrived"(Inbound Flow)
+  // * Might need to split the content up by inbound and outbound 
+  GetOutboundNeededStatus(){
+    this.UserOutboundDeliveryStatus = [];
+    for(let i = 0 ; i < this.UserOutboundDeliveryObjects.length ; i ++){
+      if(this.UserOutboundDeliveryObjects[i].delivery_status === "Cart Arrived at Building Tenant" 
+      || this.UserOutboundDeliveryObjects[i].delivery_status === "Cart Arrived at Depot Admin"  
+      || this.UserOutboundDeliveryObjects[i].delivery_status === "Handled Over to Logistic Partner"){
+        this.UserOutboundDeliveryStatus.push(this.UserOutboundDeliveryObjects[i]);
+
+        
+      }
+    }
+    console.log(this.UserOutboundDeliveryStatus);
   }
 
   

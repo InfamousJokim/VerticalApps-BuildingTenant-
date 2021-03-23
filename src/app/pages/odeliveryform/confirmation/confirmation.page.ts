@@ -43,7 +43,7 @@ export class ConfirmationPage implements OnInit{
   notifications : Notifications[]
   notification = new Notifications();
 
-  layoutMakerID :string[] = ["f4569c0d-8a9a-47aa-8227-e51da19e7cb5", "ec261ca9-dc17-4c03-b74f-5240f02680b0", "f4569c0d-8a9a-47aa-8227-e51da19e7cb5", "b79de834-d32e-44c9-9089-83fc596f5dd2"];
+  //layoutMakerID :string[] = ["f4569c0d-8a9a-47aa-8227-e51da19e7cb5", "ec261ca9-dc17-4c03-b74f-5240f02680b0", "f4569c0d-8a9a-47aa-8227-e51da19e7cb5", "b79de834-d32e-44c9-9089-83fc596f5dd2"];
 
   orn : string;
   current_datetime: string ="";
@@ -94,6 +94,7 @@ export class ConfirmationPage implements OnInit{
     let checker = true;
     await this.OD.GetSelectedJobs(this.orn).then(res => {
       this.jobRows = res["result"]["list"];
+      console.log(res);
       this.current_datetime = this.jobRows[0].job_start_time
       console.log("TEST: "+this.current_datetime)
     })
@@ -116,12 +117,12 @@ export class ConfirmationPage implements OnInit{
       for (let i = 0; i < this.jobRows.length; i++) {
         //call the postjob api and pass in the robot_id, execution time
         let job_time = (moment.utc(this.jobRows[i].job_start_time).set('second', 0));
-        await this.OD.Post_Job(job_time.toISOString(), this.jobRows[i].robot_id, this.layoutMakerID[0]).then(data=>{
+        await this.OD.Post_Job(job_time.toISOString(), this.jobRows[i].robot_id, "85d0140a-a22f-414d-b1db-6a97ef8c31c5").then(data=>{
           console.log(data)
         })
         let job_time_2 = moment.utc(job_time).local()
         for (let a = 1; a < 4; a++){
-         await this.OD.Post_Job(job_time_2.add(1, 'm').toISOString(), this.jobRows[i].robot_id, this.layoutMakerID[a]).then(data=>{
+         await this.OD.Post_Job(job_time_2.add(1, 'm').toISOString(), this.jobRows[i].robot_id, "85d0140a-a22f-414d-b1db-6a97ef8c31c5").then(data=>{
            console.log(data)
          })
 

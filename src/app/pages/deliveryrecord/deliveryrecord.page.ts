@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { DatePipe } from '@angular/common';
 import { Inbound_Delivery, Outbound_Delivery } from 'src/app/interface';
 import { DeliveryrecordService } from './deliveryrecord.service';
 import { AlertController, ModalController, PopoverController } from '@ionic/angular';
@@ -30,17 +29,11 @@ export class DeliveryrecordPage  {
   public inbound : any ; 
 
   //This is to be used when there is ngx-datatable 
-  public outbounddata:any = [] 
-  public inbounddata:any = [] 
   public outboundrows : any ; 
   public inboundrows: any;
   inboundColumns:any = {};
   outboundColumns: any = {};
   
-  public count : any ; 
-  
-  public doublecolumn : "Double Column" ; 
-  public fullcolumn : "Full Column" ; 
 
   public outboundInfo : any ={};
   public orn : any ; 

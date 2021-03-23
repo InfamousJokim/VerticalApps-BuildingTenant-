@@ -12,30 +12,55 @@
   
   <!--Getting the list of Outbound Delivery Status with the status of "Arrived at Building Tenant" & "Arrived at Depot Admin"-->
   
-    <div  *ngFor="let outbound of UserDeliveryStatus ; let i = index " class="ion-padding">
-      <ion-list>
+    <div  *ngFor="let outbound of UserOutboundDeliveryStatus ; let i = index ">
+
         
-          
-            <ion-item (click)="GetData(outbound)">
-                 <div style="font-size: 40px;" class="ion-padding">
-                    <ion-icon name="mail-outline"></ion-icon>
-                  </div>
-                
-                  <div style="font-size: 10px;" >
-                    <ion-label> ORN : <br> 
-                      <u>{{outbound.orn}}</u>
-                    </ion-label>
-                  </div>
-                  <ion-row>
-                    <ion-label style="margin-left: 15%; width: 250px;" class="delivery_status" > Delivery Status : <br>{{outbound.delivery_status}}</ion-label>
-                  </ion-row>
-                  
-                
-            </ion-item>
-          
-      
-      </ion-list>
+            <ion-card (click)="GetOutboundData(outbound)">
+              <ion-grid>
+                <ion-row>
+                  <ion-col>
+                    <div class="icon-size" >
+                      <ion-icon name="mail-outline"></ion-icon>
+                    </div>
+                  </ion-col>
+                  <ion-col size="10">
+                    <ion-row>
+                      ORN : {{outbound.orn}}
+                    </ion-row>
+                    <ion-row>
+                      Delivery Status : {{outbound.delivery_status}}
+                    </ion-row>
+                  </ion-col>
+                </ion-row>
+              </ion-grid>
+            </ion-card>
+        
     </div>
+
+    <div  *ngFor="let inbound of UserInboundDeliveryStatus ; let i = index ">
+
+        
+      <ion-card (click)="GetInboundData(inbound)">
+        <ion-grid>
+          <ion-row>
+            <ion-col>
+              <div class="icon-size" >
+                <ion-icon name="mail-outline"></ion-icon>
+              </div>
+            </ion-col>
+            <ion-col size="10">
+              <ion-row>
+                IRN : {{inbound.irn}}
+              </ion-row>
+              <ion-row>
+                Delivery Status : {{inbound.delivery_status}}
+              </ion-row>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-card>
+  
+</div>
   
   
 

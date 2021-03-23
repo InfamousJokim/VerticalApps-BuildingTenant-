@@ -25,12 +25,12 @@ export class OdeliveryformService {
 
   //Robot Manager
     public skillsetID = "49b75968-30f3-463f-8063-566d3650099b";
-    public locationID = "6fd21a59-4bd9-4d5b-bfed-76e4bfd573d8";
+    public locationID = "b036992d-a923-4810-b15e-71dcd1398d1b";
     public markerTypeID = "b0000000-b000-b000-b000-b00000000001";
     public priorityID = "b0000000-b000-b000-b000-b00000000004";
     public robotID = "251a4343-67cb-4987-a970-1cdca94580de";
     public scheduleTypeID = "b0000000-b000-b000-b000-b00000000012";
-    public layoutMarkerID = "b79de834-d32e-44c9-9089-83fc596f5dd2"; //1 China
+    public layoutMarkerID = "85d0140a-a22f-414d-b1db-6a97ef8c31c5"; //1 China
     //public layoutMarkerID = "f4569c0d-8a9a-47aa-8227-e51da19e7cb5"; 2 Singapore
     //public layoutMarkerID = "ec261ca9-dc17-4c03-b74f-5240f02680b0"; 3 China
     //public layoutMarkerID = "b79de834-d32e-44c9-9089-83fc596f5dd2"; 4 Start A

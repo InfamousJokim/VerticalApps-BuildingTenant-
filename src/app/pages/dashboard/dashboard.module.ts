@@ -19,7 +19,7 @@ import { HttpClientModule} from '@angular/common/http';
     DashboardPageRoutingModule,
     SharedModule,
     HttpClientModule,
-    NgxDatatableModule
+    NgxDatatableModule,
   ],
   declarations: [DashboardPage],
   schemas:[CUSTOM_ELEMENTS_SCHEMA]

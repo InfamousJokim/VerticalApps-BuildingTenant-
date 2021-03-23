@@ -52,7 +52,9 @@ export class NotificationService {
 
   //Get Inbound Pin API 
     async GetInboundPin(){
-      return await this.http.get("http://52.74.132.238/api/inbound_deliveries/pin/" , { headers : new HttpHeaders({
+      let irn = JSON.parse(localStorage.getItem("SelectedIRN")).irn
+      console.log(irn);
+      return await this.http.get("http://52.74.132.238/api/inbound_deliveries/pin/" + irn ,  { headers : new HttpHeaders({
         'Content-Type': 'application/json',
         'Authorization': 'Bearer ' + (this.cookieService.get('session'))
       })

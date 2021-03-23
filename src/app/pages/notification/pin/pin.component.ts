@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { PopoverController } from '@ionic/angular';
 import { NotificationService } from '../notification.service';
 
 @Component({
@@ -10,24 +11,31 @@ import { NotificationService } from '../notification.service';
 export class PinComponent implements OnInit {
 
   public outboundPin : any ; 
-  public inboundPin : any ; 
+  
   
 
 
-  constructor(private ns : NotificationService ) { }
+  constructor(private ns : NotificationService , private popoverController : PopoverController ) { }
 
   ngOnInit() {
 
-    this.GetDecyptedInboundPin();
+    this.GetDecryptedOutboundPin();
+    this.DismissClick();
   }
 
-  async GetDecyptedInboundPin(){
+  async DismissClick() {
+    await this.popoverController.dismiss();
+      }
+
+  async GetDecryptedOutboundPin(){
     await this.ns.GetOutboundPin().then((res: any) =>{
       this.outboundPin = (res['result']);
       console.log(this.outboundPin);
     })
     
   }
+
+  
 
 
 }

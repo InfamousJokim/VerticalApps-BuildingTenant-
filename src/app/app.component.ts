@@ -169,7 +169,7 @@ export class AppComponent {
         id: 1,
         text: 'Delivery Record : '+ JSON.parse(localStorage.getItem('UpdateDataBT')).orn ,
         sound: 'file://sound.mp3',
-        data: { mydata : 'Delivery Status : ' + localStorage.getItem('mqttMessage')} , 
+        data: { mydata : 'Hello! The Delivery Cart has arrived at your doorstep ! Please load the necessary Parcels '} , 
         trigger : { in : 5 , unit : ELocalNotificationTriggerUnit.SECOND}, 
         foreground : true 
         
@@ -182,7 +182,7 @@ export class AppComponent {
         id: 1,
         text: 'Delivery Record : '+ JSON.parse(localStorage.getItem('UpdateDataDA')).orn  ,
         sound: 'file://sound.mp3',
-        data: { mydata : 'Delivery Status : ' + localStorage.getItem('mqttMessage')} , 
+        data: { mydata : 'Parcels has arrived at Depot Admin Location '} , 
         trigger : { in : 5 , unit : ELocalNotificationTriggerUnit.SECOND}, 
         foreground : true 
         
