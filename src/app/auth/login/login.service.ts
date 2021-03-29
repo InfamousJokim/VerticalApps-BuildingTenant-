@@ -28,17 +28,7 @@ export class LoginService {
       return await this.http.post<Login>("http://52.74.132.238/api/token-auth", login, httpOptions).toPromise();
        
     }
-    /*login(login: Login): Observable<Login> {
-        //return this.http.post<Login>("/api/token-auth", login, httpOptions)
-        return this.http.post<Login>("http://52.74.132.238/api/token-auth", login, httpOptions)
-        //return this.http.post<Users>("/api/add_user", user, httpOptions)
-          .pipe(
-            catchError(this.handleError),
-          );
-         
-      }*/
-
-      
+  
       //Getting token for authentication
       get_token(){
         return this.http.get("http://52.74.132.238/api/token-auth", httpOptions)

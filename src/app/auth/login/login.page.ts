@@ -81,7 +81,6 @@ export class LoginPage implements OnInit {
     //wait for POST operation to complete then return response
     this.token = "";
     this.authenticated = "";
-    this.robotmanager_token = "";
     this.status = "";
     const loading = await this.loading();
     await this.loginService.login(this.log).then(res =>{
@@ -95,19 +94,10 @@ export class LoginPage implements OnInit {
       }
     );
     
-    await this.loginService.robot_manager_token(this.log).then(res =>{
-      this.robotmanager_token = res['token'];
-      
-    })
-      .catch(err =>{
-        this.status = err['error']
-        console.log(err)
-      }
-    );
     //this.token = token_retrieve['token'];
-    if (this.status ==="" && this.token !== "" && this.robotmanager_token !== ""){
+    if (this.status ==="" && this.token !== ""){
       await this.setCookie('session', this.token, 1, '/');
-      await this.setCookie('robotmanager_token', this.robotmanager_token, 1, '/');
+     
       localStorage.setItem("User_Email", JSON.stringify(this.log.username));
       loading.dismiss();
       this.go_next_page();

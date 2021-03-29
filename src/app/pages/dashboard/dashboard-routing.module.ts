@@ -7,6 +7,10 @@ const routes: Routes = [
   {
     path: '',
     component: DashboardPage
+  },
+  {
+    path: 'more-info-inbound',
+    loadChildren: () => import('./more-info-inbound/more-info-inbound.module').then( m => m.MoreInfoInboundPageModule)
   }
 ];
 
