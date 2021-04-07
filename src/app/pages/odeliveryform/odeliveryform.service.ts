@@ -4,7 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { HttpErrorResponse} from '@angular/common/http';
 import { HttpHeaders } from '@angular/common/http';
 import { catchError} from 'rxjs/operators';
-import { Outbound, Notifications } from '../../interface'
+import { Outbound, Notifications, Carts } from '../../interface'
 import { CookieService } from 'ngx-cookie-service';
 
 const httpOptions = {
@@ -81,6 +81,15 @@ export class OdeliveryformService {
         catchError(this.handleError)
       );
   }
+
+  //API to get carts that are available
+  async getAvailableCarts(){
+    return await this.http.get("http://52.74.132.238/api/available_carts", { headers: new HttpHeaders({ 
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + (this.cookieService.get('session'))
+    }) }).toPromise();
+  }
+  
 
   async GetSelectedJobs(orn : string) {
     return await this.http.get("http://52.74.132.238/api/delivery_with_jobs/"+orn, { headers: new HttpHeaders({ 

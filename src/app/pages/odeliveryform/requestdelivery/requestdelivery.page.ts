@@ -7,7 +7,7 @@ import { OdeliveryformService } from '../odeliveryform.service';
   templateUrl: './requestdelivery.page.html',
   styleUrls: ['./requestdelivery.page.scss'],
 })
-export class RequestdeliveryPage  {
+export class RequestdeliveryPage implements OnInit  {
 
   
 
@@ -21,6 +21,51 @@ export class RequestdeliveryPage  {
   //Giving values to checkbox
 
   cartType : string ; 
+
+  cartsRows : any ;
+
+  fc_carts : boolean ;
+  dc_carts : boolean ; 
+
+  async ngOnInit(){
+   await this.CheckAvailableCarts();
+
+  }
+
+  async doRefresh(event) {
+    //location.reload();
+    await this.CheckAvailableCarts();
+    event.target.complete();
+  }
+
+  async CheckAvailableCarts(){
+    await this.OD.getAvailableCarts().then((res: any) =>{
+      this.cartsRows = res['result']['list'];
+
+      if (this.cartsRows.length != 0){
+        for (let i = 0; i < this.cartsRows.length; i++){
+          if (this.cartsRows[i].cart_name.startsWith("Cart FC") == true){
+           this.fc_carts = true;
+          }else if (this.cartsRows[i].cart_name.startsWith("Cart DC") == true){
+           this.dc_carts = true;
+          }
+        }
+      }else{
+        this.fc_carts = false;
+        this.dc_carts = false;
+      }
+
+      if (this.fc_carts == null){
+        this.fc_carts = false;
+      }
+
+      if (this.dc_carts == null){
+        this.dc_carts = false;
+      }
+
+      
+     })
+  }
 
   
   getCart(){

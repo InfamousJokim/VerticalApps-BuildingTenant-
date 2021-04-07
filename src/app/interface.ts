@@ -84,3 +84,10 @@ export class Notifications{
 export class Pin {
   pin : string ; 
 }
+
+export class Carts {
+  Cart_name : string ; 
+  Cart_status : string ; 
+  Cart_type : string ; 
+
+}
