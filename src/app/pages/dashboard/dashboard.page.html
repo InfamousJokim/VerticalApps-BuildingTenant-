@@ -61,7 +61,7 @@
           <div *ngFor="let outbounds of OutboundUserDeliveryRecords; let i = index" class="ion-padding">
             
 
-            <div ></div>
+            
               <ion-card class="card-size" (click)="getData(outbounds)"  >
                   <div class="left">
                     <ion-row>
@@ -76,7 +76,7 @@
                       </ion-col>
                       <ion-col>
                         <ion-row >
-                          <img src="../../../assets/Images/cage.jpg" class="cart-image"><br>
+                          <img src="../../../assets/Images/full_column.jpg" class="cart-image"><br>
                         </ion-row>
                         
                         
@@ -97,7 +97,7 @@
         <mat-tab label="Inbound Delivery">
          
           <div *ngFor="let inbounds of InboundUserDeliveryRecords" class="ion-padding">
-            <ion-card class="card-size" >
+            <ion-card class="card-size" (click)="getInboundData(inbounds)">
               <div >
                 
                       <div class="left">
@@ -120,7 +120,7 @@
 
                           <ion-col>
                             <ion-row >
-                              <img src="../../../assets/Images/Full-Column-Cart.jpg" class="cart-image"><br>
+                              <img src="../../../assets/Images/full_column.jpg" class="cart-image"><br>
                             </ion-row>
                           </ion-col>
                         </ion-row>

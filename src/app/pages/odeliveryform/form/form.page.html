@@ -68,10 +68,22 @@
 
         <ion-item>
           <ion-label>Logistic Partner</ion-label>
-          <ion-select interface="popover"  [(ngModel)]= "log_partner" formControlName="logistic_partner">
-          <ion-select-option value="DHL">DHL</ion-select-option>
-          <ion-select-option value="NinjaVan">NinjaVan</ion-select-option>
-          <ion-select-option value="UParcel">UParcel</ion-select-option>
+          <ion-select interface="popover"  [(ngModel)]= "log_partner" class="LogSelect" formControlName="logistic_partner">
+          <ion-select-option value="DHL">
+            <ion-fab-button>
+              DHL
+            </ion-fab-button>
+          </ion-select-option>
+          <ion-select-option value="NinjaVan">
+            <ion-fab-button>
+              NinjaVan
+            </ion-fab-button>  
+          </ion-select-option>
+          <ion-select-option value="UParcel">
+            <ion-fab-button>
+              UParcel
+            </ion-fab-button>
+          </ion-select-option>
           </ion-select>
           </ion-item>
         <div *ngFor="let error of errorMessages.logistic_partner">

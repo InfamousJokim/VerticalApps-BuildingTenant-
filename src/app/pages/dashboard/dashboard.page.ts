@@ -10,6 +10,7 @@ import { AppSettings } from '../../app.settings';
 import { DatePipe } from '@angular/common';
 import { AlertController, PopoverController } from '@ionic/angular';
 import { MoreInfoPage } from '../deliveryrecord/more-info/more-info.page';
+import { MoreInfoInboundPage } from './more-info-inbound/more-info-inbound.page';
 
 export interface Data {
   deliveries: string;
@@ -124,6 +125,12 @@ export class DashboardPage  implements OnInit {
       this.presentPopover(outbounds);
     }
 
+      getInboundData(inbounds : Inbound_Delivery){
+        console.log(inbounds);
+        localStorage.setItem("inbound_delivery" , JSON.stringify(inbounds));
+        this.presentInboundPopover(inbounds)
+    }
+
     async presentPopover(outbounds: any){
 
 
@@ -135,6 +142,22 @@ export class DashboardPage  implements OnInit {
       });
   
       console.log(outbounds);
+      return popover.present();
+      
+      
+    }
+
+    async presentInboundPopover(inbounds: any){
+
+
+      const popover = await this.popoverController.create({
+        component: MoreInfoInboundPage,
+        cssClass: 'my-custom-class',
+        event: inbounds,
+        translucent: true,
+      });
+  
+      console.log(inbounds);
       return popover.present();
       
       

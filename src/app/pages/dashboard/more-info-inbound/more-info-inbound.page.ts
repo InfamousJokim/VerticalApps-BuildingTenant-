@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { AlertController, PopoverController } from '@ionic/angular';
+import { DeliveryrecordService } from '../../deliveryrecord/deliveryrecord.service';
+import { DashboardService } from '../dashboard.service';
 
 @Component({
   selector: 'app-more-info-inbound',
@@ -7,9 +10,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MoreInfoInboundPage implements OnInit {
 
-  constructor() { }
+  inboundData : any = {};
+
+  constructor(public ds : DashboardService , public alertCtrl : AlertController , public popover : PopoverController) { }
 
   ngOnInit() {
+    this.inboundData = JSON.parse(localStorage.getItem("inbound_delivery"));
   }
 
 }

@@ -36,7 +36,7 @@
       <ion-col >
         
         <span>Double Column</span><br>
-        <img *ngIf="dc_carts == true;" [disabled]="option2 .valueOf(true)" src="../../../assets/Images/cage.jpg">
+        <img style="width: 170px;height: 170px;" src="../../../assets/Images/double_column.jpg">
         <span *ngIf="dc_carts != true;">Not Available</span>
         <ion-checkbox *ngIf="dc_carts == true;" ngControl="selected" [(ngModel)]="option1" (ionchange)="change1()"  [disabled]="option2 .valueOf(true)" mode="ios"  ></ion-checkbox>
         
@@ -45,7 +45,7 @@
       <ion-col>
         
         <span>Full Column</span>
-        <img src="../../../assets/Images/cage.jpg">
+        <img style="width: 170px;height: 170px;" src="../../../assets/Images/full_column.jpg">
         <span *ngIf="fc_carts != true;">Not Available</span>
         <ion-checkbox *ngIf="fc_carts == true;" [(ngModel)]="option2" (ionchange)="change2()"  [disabled]="option1 .valueOf(true)" mode="ios"  ></ion-checkbox>
         
