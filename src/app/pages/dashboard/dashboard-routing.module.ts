@@ -11,6 +11,10 @@ const routes: Routes = [
   {
     path: 'more-info-inbound',
     loadChildren: () => import('./more-info-inbound/more-info-inbound.module').then( m => m.MoreInfoInboundPageModule)
+  },
+  {
+    path: 'sidepopover',
+    loadChildren: () => import('./sidepopover/sidepopover.module').then( m => m.SidepopoverPageModule)
   }
 ];
 

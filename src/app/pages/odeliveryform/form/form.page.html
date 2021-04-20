@@ -1,9 +1,8 @@
 
-<ion-header [translucent]="true" >
   <ion-toolbar>
     <ion-title class="text-center" style="color: black;">Delivery Request</ion-title>
   </ion-toolbar>
-</ion-header>
+
 
 <ion-content>
 
@@ -67,8 +66,8 @@
         <br>
 
         <ion-item>
-          <ion-label>Logistic Partner</ion-label>
-          <ion-select interface="popover"  [(ngModel)]= "log_partner" class="LogSelect" formControlName="logistic_partner">
+          <ion-label>Logistic Partner : </ion-label>
+          <ion-select [(ngModel)]= "log_partner" class="LogSelect" formControlName="logistic_partner">
           <ion-select-option value="DHL">
             <ion-fab-button>
               DHL

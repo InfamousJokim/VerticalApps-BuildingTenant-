@@ -89,6 +89,26 @@ export class DashboardService {
      
   }
 
+  //Get Outbound Job Status
+  async getOutboundJobStatus() {
+    return await this.http.get<Outbound_Delivery>("http://52.74.132.238/api/jobs", { headers: new HttpHeaders({ 
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + (this.cookieService.get('session'))
+    }) 
+  }).toPromise();
+     
+  }
+
+  //Get Inbound Job status
+  async getInboundJobStatus() {
+    return await this.http.get<Outbound_Delivery>("http://52.74.132.238/api/jobs", { headers: new HttpHeaders({ 
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + (this.cookieService.get('session'))
+    }) 
+  }).toPromise();
+     
+  }
+
  
 
 

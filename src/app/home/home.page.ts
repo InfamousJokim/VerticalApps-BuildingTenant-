@@ -47,25 +47,11 @@ export class HomePage implements OnInit {
       console.log(this.num_outbound_notification);
     }
     
-
-    //Change
     
 
   }
 
-  /**async GetNotificationNum(){
-    this.UserDeliveryRecords = [];
-    
-    for(let i = 0 ; i < this.outbounds.length() ; i ++){
-      if(this.outbounds[i].tenant_name === JSON.parse(localStorage.getItem("Display_Name")) && (this.outbounds[i].delivery_status === "Cart Arrived at Building Tenant" || 
-      this.outbounds[i].delivery_status === "Cart Arrived at Depot Admin" || this.outbounds[i].delivery_status === "Handled Over to Logistic Partner")){
-        this.UserDeliveryRecords.push(this.outbounds[i]);
-        
-      }
-    }
-    
-    console.log(this.UserDeliveryRecords);
-  }*/
+
 
 
   async ngOnInit(){

@@ -19,26 +19,6 @@ export class NotificationService {
     'Authorization': 'Bearer ' + (this.cookieService.get('session'))
   });
 
-  //Get notification data 
- /*async GetNotificationData() {
-    return await this.http.get("http://52.74.132.238/api/outbound_deliveries/getnotification", { headers: new HttpHeaders({ 
-      'Content-Type': 'application/json',
-      'Authorization': 'Bearer ' + (this.cookieService.get('session'))
-    }) 
-  }).toPromise();
-     
-  }*/
-
-
-  //GET objects from Notification Table
-  /**async GetStatusNotificationData(){
-    return await this.http.get("http://52.74.132.238/api/outbound_deliveries/getnotification/", { headers: new HttpHeaders({ 
-      'Content-Type': 'application/json',
-      'Authorization': 'Bearer ' + (this.cookieService.get('session'))
-    }) 
-  }).toPromise();
-  }*/
-
   //Get Outbound Pin API
   async GetOutboundPin(){
     let orn = JSON.parse(localStorage.getItem("SelectedORN")).orn

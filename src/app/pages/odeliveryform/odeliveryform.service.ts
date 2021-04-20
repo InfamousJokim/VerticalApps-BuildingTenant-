@@ -38,7 +38,7 @@ export class OdeliveryformService {
     this.subject.next(formData);
   }
 
-  //Sending Cart type to confirmation & database
+  //Sending Cart type to Confirmation Page 
   SendCartType(cartType : any){
     console.log(cartType);
     this.subject.next(cartType);
@@ -63,6 +63,7 @@ export class OdeliveryformService {
   }
 
 
+  //POST : Create Outbound Delivery Request 
   async addOutbound(outbound: Outbound){
     return await this.http.post<Outbound>("http://52.74.132.238/api/outbound_deliveries", outbound, { headers: new HttpHeaders({ 
       'Content-Type': 'application/json',
@@ -71,6 +72,7 @@ export class OdeliveryformService {
    }).toPromise();
   }
 
+  
   addNotification(notification: Notifications): Observable<Notifications> {
     return this.http.post<Notifications>("http://52.74.132.238/api/outbound_deliveries/notification", notification, { headers: new HttpHeaders({ 
       'Content-Type': 'application/json',
@@ -82,7 +84,7 @@ export class OdeliveryformService {
       );
   }
 
-  //API to get carts that are available
+  //GET : API to get carts that are available
   async getAvailableCarts(){
     return await this.http.get("http://52.74.132.238/api/available_carts", { headers: new HttpHeaders({ 
       'Content-Type': 'application/json',
@@ -90,7 +92,7 @@ export class OdeliveryformService {
     }) }).toPromise();
   }
   
-
+  
   async GetSelectedJobs(orn : string) {
     return await this.http.get("http://52.74.132.238/api/delivery_with_jobs/"+orn, { headers: new HttpHeaders({ 
       'Content-Type': 'application/json',

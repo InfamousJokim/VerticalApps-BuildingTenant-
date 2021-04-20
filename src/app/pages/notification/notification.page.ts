@@ -53,7 +53,7 @@ export class NotificationPage implements OnInit{
   //Both the inbound and outbound array 
   public CombinedDeliveryRequest : any ;
 
-  constructor(private SettingComponent : SettingPage ,private render : Renderer2 , private localNotifications : LocalNotifications , private plt : Platform , private alertCtrl : AlertController , private NS : NotificationService , private appSettings : AppSettings , private ds : DeliveryrecordService , private ns : NotificationService , public popoverController : PopoverController){
+  constructor(private SettingComponent : SettingPage ,private render : Renderer2 , private localNotifications : LocalNotifications , private plt : Platform , private alertCtrl : AlertController , private NS : NotificationService , private appSettings : AppSettings , private ds : DeliveryrecordService  , public popoverController : PopoverController){
     
     //Subscribing Data from MQTT 
     
@@ -86,12 +86,6 @@ export class NotificationPage implements OnInit{
   }
 
   ngOnInit(){
-    
-    //Call API to get objects in Notification Table
-    /*this.NS.GetStatusNotificationData().then((res : any ) => {
-      this.notification = res['result']['list'];
-      console.log(this.notification);
-    })*/
 
     //Call API to get objects in Outbound Delivery Table
     this.ds.getOutboundStatus().then((res: any) =>{
@@ -136,7 +130,7 @@ export class NotificationPage implements OnInit{
     this.presentInboundPopover(inbound)
   }
 
-  //generating a Outbound Popover
+  //generating a Outbound Popover to get the pin number
 
   currentPopover = null ; 
   async presentOutboundPopover(outbound: any ) {
@@ -157,7 +151,7 @@ export class NotificationPage implements OnInit{
   }
 
   
-  //Generating a Inbound Popover 
+  //Generating a Inbound Popover to get Pin number 
   async presentInboundPopover(inbound : any){
     
     const Inboundpopover = await this.popoverController.create({
@@ -187,6 +181,7 @@ export class NotificationPage implements OnInit{
     console.log(this.inbounds);
   }
 
+  //Get Inbound Notification items only when the status = "Delivery Arrived"
   GetInboundNeededStatus(){
     this.UserInboundDeliveryStatus = [];
     for(let i = 0 ; i < this.UserInboundDeliveryObjects.length ; i ++){
@@ -213,14 +208,13 @@ export class NotificationPage implements OnInit{
   }
 
   //Get 4 Status to be displayed to user 
-  // "Cart Arrived at Building Tenant" || "Cart Arrived at Depot Admin" || "Handled Over to Logistic Partner" || "Delivery Arrived"(Inbound Flow)
+  // "Cart Arrived at Building Tenant" || "Cart Arrived at Depot Admin" 
   // * Might need to split the content up by inbound and outbound 
   GetOutboundNeededStatus(){
     this.UserOutboundDeliveryStatus = [];
     for(let i = 0 ; i < this.UserOutboundDeliveryObjects.length ; i ++){
       if(this.UserOutboundDeliveryObjects[i].delivery_status === "Cart Arrived at Building Tenant" 
-      || this.UserOutboundDeliveryObjects[i].delivery_status === "Cart Arrived at Depot Admin"  
-      || this.UserOutboundDeliveryObjects[i].delivery_status === "Handled Over to Logistic Partner"){
+      || this.UserOutboundDeliveryObjects[i].delivery_status === "Cart Arrived at Depot Admin"){
         this.UserOutboundDeliveryStatus.push(this.UserOutboundDeliveryObjects[i]);
 
         
@@ -231,7 +225,7 @@ export class NotificationPage implements OnInit{
 
   
 
-  //Alert : Shown on application
+  //Alert : When there is a notification received from the frontend
   showAlert(header , sub , msg){
     console.log("show");
     this.alertCtrl.create({
@@ -242,6 +236,7 @@ export class NotificationPage implements OnInit{
     }).then(alert => alert.present());
   }
 
+  //Refreshing the current page
   async doRefresh(event) {
     await this.ngOnInit();
     event.target.complete();

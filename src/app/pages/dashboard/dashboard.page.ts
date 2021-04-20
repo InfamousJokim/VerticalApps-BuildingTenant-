@@ -11,6 +11,9 @@ import { DatePipe } from '@angular/common';
 import { AlertController, PopoverController } from '@ionic/angular';
 import { MoreInfoPage } from '../deliveryrecord/more-info/more-info.page';
 import { MoreInfoInboundPage } from './more-info-inbound/more-info-inbound.page';
+import { SidepopoverPage } from './sidepopover/sidepopover.page';
+import { AppService } from 'src/app/app.service';
+
 
 export interface Data {
   deliveries: string;
@@ -25,8 +28,12 @@ export interface Data {
   templateUrl: './dashboard.page.html',
   styleUrls: ['./dashboard.page.scss'],
   providers : [AppSettings , AlertController , DashboardService , DatePipe] , 
-  encapsulation: ViewEncapsulation.None
+  encapsulation: ViewEncapsulation.None,
+
 })
+
+
+
 export class DashboardPage  implements OnInit {
 
 
@@ -36,10 +43,16 @@ export class DashboardPage  implements OnInit {
   public outbound : any;
   public inbound : any ; 
 
-  inboundColumns:any = {};
-  outboundColumns: any = {};
-  public inboundrows : any; 
-  public outboundrows : any;  
+  public inboundsjobs : Inbound_Delivery; 
+  public outboundsjobs : Outbound_Delivery; 
+  public inboundjobs : any ; 
+  public outboundjobs : any ; 
+
+  public jobs : Inbound_Delivery ; 
+  public job : any ; 
+
+
+
   
   public OutboundUserDeliveryRecords : any[] = [] ; 
   public InboundUserDeliveryRecords : any[] = [] ; 
@@ -48,7 +61,7 @@ export class DashboardPage  implements OnInit {
   paramlist= new ParamList();
 
 
-  constructor( private http: HttpClient ,  private datepipe: DatePipe , private ds : DashboardService , private cookieservice:CookieService  , private router : Router , private appSettings : AppSettings , public popoverController : PopoverController ) {
+  constructor( private http: HttpClient ,  private datepipe: DatePipe , private ds : DashboardService , private cookieservice:CookieService  , private router : Router , private appSettings : AppSettings , public popoverController : PopoverController , public AS : AppService ) {
     this.paramlist.PageNo = 1;
     this.paramlist.PageSize = 10;
     this.paramlist.SearchColumn = "userName";
@@ -77,20 +90,15 @@ export class DashboardPage  implements OnInit {
       console.log(this.outbound);
       this.GetOutboundUserDelivery();
     })  
-
-
-    this.inboundColumns = [ 
-      {prop : 'irn' , name: "IRN" },
-      {prop : 'delivery_status' , name: "Delivery Status"}
-    ]
-
     
+    //Get Outbound Job Objects from Database
+    await this.AS.getJobStatus().then((res: any) =>{
+      this.jobs = res['result']['list'];
+      console.log(this.jobs);
+      
+    })  
 
 
-    this.outboundColumns = [ 
-      {prop : 'orn' , name: "ORN" },
-      {prop : 'delivery_status' , name: "Delivery Status"}
-    ]
 
     await this.get_deliveries();
     
@@ -161,6 +169,20 @@ export class DashboardPage  implements OnInit {
       return popover.present();
       
       
+    }
+
+    //SideMenu Popover 
+    async SidePopover(ev: any) {
+      const popover = await this.popoverController.create({
+        component: SidepopoverPage,
+        cssClass: 'my-custom-class',
+        event: ev,
+        translucent: true
+      });
+      await popover.present();
+  
+      const { role } = await popover.onDidDismiss();
+      console.log('onDidDismiss resolved with role', role);
     }
 
     //Logout

@@ -24,11 +24,13 @@ export class MoreInfoPage implements OnInit {
 
   //function to cancel the delivery
   CancelDelivery(outbound : Outbound_Delivery){
-    if(this.outboundData.delivery_status === "Pending" || this.outboundData.delivery_status === "Cart To Building Tenant"){
+    console.log(outbound);
+    if(this.outboundData.delivery_status === "Outbound Delivery Scheduled"){
       this.presentAlertConfirm(outbound);
+      console.log("pass")
     }
 
-    if(this.outboundData.delivery_status === "Cart Arrived At Building Tenant" || this.outboundData.delivery_status === "Loading Parcels" || this.outboundData.delivery_status === "Cart To Depot Admin" || this.outboundData.delivery_status === "Cart Arrived at Depot Admin" || 
+    if(this.outboundData.delivery_status === "Cart to Building Tenant" || this.outboundData.delivery_status === "Cart Arrived At Building Tenant" || this.outboundData.delivery_status === "Loading Parcels" || this.outboundData.delivery_status === "Cart To Depot Admin" || this.outboundData.delivery_status === "Cart Arrived at Depot Admin" || 
     this.outboundData.delivery_status === "Parcel Unloading" || this.outboundData.delivery_status === "Handled Over To Logistic Partner"  || this.outboundData.delivery_status === "Parcel awaiting collection from Logistic Partner"){
       this.presentAlert();
     }

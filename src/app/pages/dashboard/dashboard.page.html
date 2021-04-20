@@ -1,10 +1,14 @@
-<ion-header [translucent]="true" >
+
   <ion-toolbar >
-    <ion-title class="text-center" style="color: black;">Dashboard</ion-title>
-    <ion-icon style="font-size: 25px;" slot="end" name="ellipsis-vertical-outline"></ion-icon>
+    <ion-title class="text-center" style="color: black;margin-left: 15%;">Dashboard</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="SidePopover()">
+        <ion-icon slot="icon-only" ios="ellipsis-horizontal" md="ellipsis-vertical"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
   
-</ion-header>
+
 
 <ion-content>
   <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
