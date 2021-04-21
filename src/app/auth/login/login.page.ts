@@ -180,10 +180,6 @@ export class LoginPage implements OnInit {
   }
   
 
-  //Submiting login inputs 
-  public submit(){
-    console.log(this.loginForm.value);
-  }
 
 
 }

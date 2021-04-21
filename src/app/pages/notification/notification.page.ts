@@ -90,7 +90,7 @@ export class NotificationPage implements OnInit{
     //Call API to get objects in Outbound Delivery Table
     this.ds.getOutboundStatus().then((res: any) =>{
       this.outbounds = res['result']['list'];
-      console.log(this.outbounds);
+      //console.log(this.outbounds);
       this.GetOutboundUserObjects();
       this.GetOutboundNeededStatus();
     })  
@@ -98,7 +98,7 @@ export class NotificationPage implements OnInit{
     //Calling API to get objects in Inbound Delivery Table
     this.ds.getInboundStatus().then((res : any) => {
       this.inbounds = res['result']['list'];
-      console.log(this.inbounds);
+      //console.log(this.inbounds);
       this.GetInboundUserObjects();
       this.GetInboundNeededStatus();
       
@@ -178,7 +178,7 @@ export class NotificationPage implements OnInit{
         this.UserInboundDeliveryObjects.push(this.inbounds[i]);
       }
     }
-    console.log(this.inbounds);
+    //console.log(this.inbounds);
   }
 
   //Get Inbound Notification items only when the status = "Delivery Arrived"
@@ -191,7 +191,7 @@ export class NotificationPage implements OnInit{
         
       }
     }
-    console.log(this.UserInboundDeliveryStatus);
+    //console.log(this.UserInboundDeliveryStatus);
   }
 
 
@@ -204,7 +204,7 @@ export class NotificationPage implements OnInit{
         
       }
     }
-    console.log(this.inbounds);
+    //console.log(this.inbounds);
   }
 
   //Get 4 Status to be displayed to user 
@@ -220,7 +220,7 @@ export class NotificationPage implements OnInit{
         
       }
     }
-    console.log(this.UserOutboundDeliveryStatus);
+    //console.log(this.UserOutboundDeliveryStatus);
   }
 
   

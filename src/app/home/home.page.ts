@@ -40,11 +40,9 @@ export class HomePage implements OnInit {
 
   async get_deliveries(){
     await delay(200);
-    //await this.GetNotificationNum();
-    console.log(this.UserDeliveryRecords);
     if(this.UserDeliveryRecords !== null){
       this.num_outbound_notification = this.UserDeliveryRecords.length;
-      console.log(this.num_outbound_notification);
+      console.log("Number of outbound deliveries : " + this.num_outbound_notification);
     }
     
     

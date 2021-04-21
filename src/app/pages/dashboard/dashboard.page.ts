@@ -75,19 +75,18 @@ export class DashboardPage  implements OnInit {
 
   async ngOnInit(){
 
-
+    //Get list of Users in Database
     await this.user_list();
     
+    //Get Inbound Deliveries from Outbound_Delivery Table 
     await this.ds.getInboundStatus().then((res: any) =>{
       this.inbound = res['result']['list'];
-      console.log(this.inbound);
       this.GetInboundUserDelivery();
      })
 
-    
+    //Get Outbound Deliveries from Outbound_Delivery Table 
     await this.ds.getOutboundStatus().then((res: any) =>{
       this.outbound = res['result']['list'];
-      console.log(this.outbound);
       this.GetOutboundUserDelivery();
     })  
     
@@ -98,11 +97,9 @@ export class DashboardPage  implements OnInit {
       
     })  
 
-
-
+    //Get Total inbound and outbound deliveries
     await this.get_deliveries();
     
-
   }
 
 
@@ -210,7 +207,6 @@ export class DashboardPage  implements OnInit {
         console.log(this.usersRows);
       })
       let email = JSON.parse(localStorage.getItem("User_Email"));
-      console.log(email);
       for (let i = 0; i < this.usersRows.length; i++){
         if (this.usersRows[i].email == email){
           localStorage.setItem("Display_Name", JSON.stringify(this.usersRows[i].displayName));
