@@ -1,0 +1,58 @@
+
+<ion-toolbar>
+  <ion-title class="text-center" style="color: black;">Delivery Request</ion-title>
+</ion-toolbar>
+
+<ion-content>
+<mat-grid-list cols="1" rowHeight="6:1">
+    <mat-grid-tile>
+      <ion-fab-button class="button-size" >1</ion-fab-button>
+      <div>------------------------</div>
+      <ion-fab-button class="button-size" >2</ion-fab-button>
+      <div>------------------------</div>
+      <ion-fab-button class="button-size" >3</ion-fab-button>
+      
+    </mat-grid-tile> 
+    <mat-grid-tile>
+      <span style="color: black;" class="txt-center">Confirm</span>
+    </mat-grid-tile>
+</mat-grid-list>
+
+<ion-card >
+  <ion-card-content class="text-align" >
+    
+    
+      
+        <ion-label class="spacing">Number of Packages/Parcels : </ion-label>
+
+        <ion-label class="spacing" style="color: black;">{{pack.parcel}}</ion-label><br>
+
+        <br><ion-label class="spacing">Delivery Time :</ion-label>
+
+        <ion-label class="spacing" style="color: black;"> {{pack.Time | date:'H:mm'}} </ion-label><br>
+
+        <br><ion-label class="spacing">Delivery Date :</ion-label>
+
+        <ion-label class="spacing" style="color: black;"> {{pack.Date | date:'dd/MM/yyyy'}} </ion-label><br>
+
+        <br><ion-label class="spacing">Logistic Partner : </ion-label>
+
+        <ion-label class="spacing" style="color: black;"> {{pack.log_partner}} </ion-label><br>
+
+        <br><ion-label class="spacing">Additional Information : </ion-label>
+
+        <ion-label class="spacing" style="color: black;"> {{pack.Add}} </ion-label><br>
+
+        
+     
+
+  </ion-card-content>
+</ion-card>
+
+
+<mat-grid-list cols="1" rowHeight="4:1">
+  <mat-grid-tile>
+    <ion-button style="align-content: center;" (click)="add_outbound()">Confirm</ion-button>
+  </mat-grid-tile>
+</mat-grid-list>
+</ion-content>

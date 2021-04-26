@@ -1,0 +1,72 @@
+
+  <ion-toolbar>
+    <ion-title class="text-center" style="margin-left: 15%;">Notification</ion-title>
+    <ion-buttons slot="end">
+      <ion-button>
+        <ion-icon slot="icon-only" ios="ellipsis-horizontal" md="ellipsis-vertical"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+
+<ion-content>
+
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  
+  <!--Getting the list of Outbound Delivery Status with the status of "Arrived at Building Tenant" & "Arrived at Depot Admin"-->
+  
+    <div  *ngFor="let outbound of UserOutboundDeliveryStatus ; let i = index ">
+
+        
+            <ion-card (click)="GetOutboundData(outbound)">
+              <ion-grid>
+                <ion-row>
+                  <ion-col>
+                    <div class="icon-size" >
+                      <ion-icon name="mail-outline"></ion-icon>
+                    </div>
+                  </ion-col>
+                  <ion-col size="10">
+                    <ion-row>
+                      ORN : {{outbound.orn}}
+                    </ion-row>
+                    <ion-row>
+                      Delivery Status : {{outbound.delivery_status}}
+                    </ion-row>
+                  </ion-col>
+                </ion-row>
+              </ion-grid>
+            </ion-card>
+        
+    </div>
+
+    <div  *ngFor="let inbound of UserInboundDeliveryStatus ; let i = index ">
+
+        
+      <ion-card (click)="GetInboundData(inbound)">
+        <ion-grid>
+          <ion-row>
+            <ion-col>
+              <div class="icon-size" >
+                <ion-icon name="mail-outline"></ion-icon>
+              </div>
+            </ion-col>
+            <ion-col size="10">
+              <ion-row>
+                IRN : {{inbound.irn}}
+              </ion-row>
+              <ion-row>
+                Delivery Status : {{inbound.delivery_status}}
+              </ion-row>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-card>
+  
+</div>
+  
+  
+
+
+</ion-content>

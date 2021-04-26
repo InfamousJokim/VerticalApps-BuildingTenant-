@@ -1,0 +1,27 @@
+<ion-tabs>
+  <ion-tab-bar  slot="bottom">
+    <ion-tab-button tab="dashboard">
+      <ion-icon name="grid-outline"></ion-icon>
+      <ion-label style="font-size: 12px;" >Dashboard</ion-label>
+    </ion-tab-button>
+    <!--<ion-tab-button tab="deliveryrecord">
+      <ion-icon name="file-tray-full-outline"></ion-icon>
+      <ion-label style="font-size: 12px;" >Delivery</ion-label>
+    </ion-tab-button>-->
+    <ion-tab-button >
+      <ion-fab-button routerLink="/requestdelivery">
+        <ion-icon style="font-size: 50px;" name="add-circle-outline"></ion-icon>
+        <!--<ion-icon name="qr-code"></ion-icon>-->
+      </ion-fab-button>
+    </ion-tab-button>
+    <ion-tab-button tab="notification">
+      <ion-icon name="notifications-outline"></ion-icon>
+      <!--<ion-badge >{{num_outbound_notification}}</ion-badge>-->
+      <ion-label style="font-size: 12px;" >Notification</ion-label>
+    </ion-tab-button>
+    <!--<ion-tab-button tab="setting">
+      <ion-icon name="cog-outline"></ion-icon>
+      <ion-label style="font-size: 12px;" >Setting</ion-label>
+    </ion-tab-button>-->
+  </ion-tab-bar>
+</ion-tabs>

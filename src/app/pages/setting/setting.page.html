@@ -1,0 +1,61 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title class="text-center">Setting</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content> 
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+  
+<div>
+  <ion-label>Indicate the Delivery Record ORN to update status to "Arrived at Building Tenant"</ion-label><br>
+  <div *ngFor="let outbound of outbounds" >
+          <ion-list>
+            <ion-item>
+            <ion-button (click)="BTDeliveryStatusLogic(outbound)" >{{outbound.orn}}</ion-button>
+            </ion-item>
+          </ion-list>
+
+  </div>
+</div>
+
+<div>
+  <ion-label>Indicate the Delivery Record ORN to update status to "Arrived at Depot Admin"</ion-label><br>
+  <div *ngFor="let outbound of outbounds" >
+          <ion-list>
+            <ion-item>
+            <ion-button (click)="DADeliveryStatusLogic(outbound)" >{{outbound.orn}}</ion-button>
+            </ion-item>
+          </ion-list>
+
+  </div>
+</div>
+
+<div>
+  <ion-label>Indicate the Delivery Record ORN to update status to "Handled Over to Logistic Partner"</ion-label><br>
+  <div *ngFor="let outbound of outbounds" >
+          <ion-list>
+            <ion-item>
+            <ion-button (click)="LogDeliveryStatusLogic(outbound)" >{{outbound.orn}}</ion-button>
+            </ion-item>
+          </ion-list>
+
+  </div>
+</div>
+
+<div>
+  <ion-label>Inbound Delivery to get the notification</ion-label><br>
+  <div *ngFor="let inbound of inbounds" >
+          <ion-list>
+            <ion-item>
+            <ion-button (click)="InboundDeliveryStatusLogic(inbound)" >{{inbound.irn}}</ion-button>
+            </ion-item>
+          </ion-list>
+
+  </div>
+</div>
+
+</ion-content>

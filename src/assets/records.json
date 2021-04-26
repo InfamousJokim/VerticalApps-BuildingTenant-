@@ -1,0 +1,32 @@
+{
+    "records": [
+        {
+            "IRN": "KO89FT67",
+            "Logistic Company": "DHL",
+            "Recipient Name": "John",
+            "Scheduled Time": "1:00pm-2:00pm",
+            "Status": "In-Progress"
+        },
+        {
+            "IRN": "JI78FT67",
+            "Logistic Company": "NinjaVan",
+            "Recipient Name": "James",
+            "Scheduled Time": "3:00pm-4:00pm",
+            "Status": "Delivered"
+        },
+        {
+            "IRN": "KO89FT67",
+            "Logistic Company": "DHL",
+            "Recipient Name": "John",
+            "Scheduled Time": "1:00pm-2:00pm",
+            "Status": "In-Progress"
+        },
+        {
+            "IRN": "JI78FT67",
+            "Logistic Company": "NinjaVan",
+            "Recipient Name": "James",
+            "Scheduled Time": "3:00pm-4:00pm",
+            "Status": "Delivered"
+        }
+    ]
+}

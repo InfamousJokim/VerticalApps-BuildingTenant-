@@ -1,0 +1,38 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>
+      <ion-icon name="chevron-back-outline" (click)="stopScan()" routerLink='/tabs/dashboard'></ion-icon>
+      QR Scan
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+ 
+<ion-content>
+
+ 
+  <!-- Shows our camera stream -->
+  <video #video [hidden]="!scanActive" width="100%"></video>
+ 
+  <!-- Used to render the camera stream images -->
+  <canvas #canvas hidden></canvas>
+ 
+  <ion-card *ngIf="scanResult">
+    <ion-card-header>
+      <ion-card-title>QR Code</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      {{ splitted }}
+
+      <!--<ion-icon (click)="reset()" ios="ios-refresh" md="md-refresh"></ion-icon>-->
+      <ion-button expand="full" (click)="reset()">
+        <ion-icon slot="start" name="qr-scanner"></ion-icon>
+        Scan Again
+      </ion-button>
+      <ion-button expand="full" (click)="stopScan()" routerLink="/tabs/dashboard">
+        <ion-icon slot="start" name="qr-scanner"></ion-icon>
+        Stop Scanning
+      </ion-button>
+    </ion-card-content>
+  </ion-card>
+ 
+</ion-content>

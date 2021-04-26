@@ -1,0 +1,52 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    
+    <ion-title>
+     Update Datetime for Cart Arrival
+    </ion-title>
+
+  </ion-toolbar>
+</ion-header>
+<br>
+<div class="current_datetime">
+  <span>Current Delivery Datetime Assigned:</span>
+  <ion-datetime value="{{current_datetime}}" display-timezone="Asia/Singapore" displayFormat="MMM DD, YYYY HH:mm"></ion-datetime>
+</div>
+<br>
+<ion-content style="overflow-y:scroll; overflow-x:hidden; height:200px;">
+  <div *ngFor="let job of unassigned_jobs" >
+    
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>Job ID:{{job.job_id}}</ion-card-title>
+        <!--<ion-button class="change_datetime_button" color="primary">Change Delivery Datetime</ion-button>-->
+      </ion-card-header>
+    
+      <ion-card-content>
+        <span>Delivery ID: {{job.delivery_id}}</span><br>
+        <span>Cart: {{job.cart_name}}</span><br>
+        <span>Robot: No Robot Assigned</span><br>
+      </ion-card-content>
+    </ion-card>
+    
+  </div>
+
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <ion-item class="change_date" color="primary">
+      <ion-label >Change Date</ion-label>
+      <ion-datetime [(ngModel)]="new_date" display-format="MMM DD, YYYY" picker-format="MMM DD, YYYY" ></ion-datetime>
+    </ion-item><br>
+    <ion-item class="change_time" color="primary">
+      <ion-label>Change Time</ion-label>
+      <ion-datetime [(ngModel)]="new_time" display-format="HH:mm" picker-format="HH:mm" ></ion-datetime>
+    </ion-item><br>
+    <div>
+      <ion-button color="warning" (click)="check_robot_availability()">Check Availability</ion-button>
+    </div>
+    
+   
+  </ion-toolbar>
+</ion-footer>

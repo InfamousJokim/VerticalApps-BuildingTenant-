@@ -1,0 +1,17 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title class="text-center">QR Code</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+  <ion-content> 
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+  <ion-fab vertical="center" horizontal="center" slot="fixed">
+    <ion-fab-button  color="primary" routerLink="/tabs/camera/qrcode">
+      <ion-icon name="qr-code"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>
