@@ -17,6 +17,7 @@ export class AppService {
   });
 
 
+  //Getting the Job details from all the job objects
   async getJobStatus() {
     return await this.http.get("http://52.74.132.238/api/jobs", { headers: new HttpHeaders({ 
       'Content-Type': 'application/json',
@@ -26,15 +27,7 @@ export class AppService {
      
   }
 
-  async getSpecificJobStatus() {
-    return await this.http.get("http://52.74.132.238/api/jobs", { headers: new HttpHeaders({ 
-      'Content-Type': 'application/json',
-      'Authorization': 'Bearer ' + (this.cookieService.get('session'))
-    }) 
-  }).toPromise();
-     
-  }
-
+  //Getting a single job object with all of its details by providing a job id (orn / irn)
   async GetJobCartBased(){
     var job_id = JSON.parse(localStorage.getItem("job_id"))
     
@@ -46,6 +39,7 @@ export class AppService {
   
 
 
+  //Handling Error 
   private handleError(error: HttpErrorResponse) {
     if (error.error instanceof ErrorEvent) {
       // A client-side or network error occurred. Handle it accordingly.

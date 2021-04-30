@@ -45,12 +45,11 @@ export class AppComponent {
   ) {
     this.initializeApp();
     this.connectMqtt();
-    //MQTT subscriptions 
 
-    
+
+    //Setting the connection state of MQTT to application 
     this._mqtt.state.subscribe((s: MqttConnectionState) => {
       this.status = s === MqttConnectionState.CONNECTED ? 'CONNECTED' : 'DISCONNECTED';
-      
       console.log(this.status);
       if (this.status == 'CONNECTED') {
          if (this.subscriptionLive != undefined) {
@@ -78,40 +77,34 @@ export class AppComponent {
   }
 
 
-  
+  //Setting connection to MQTT Broker 
   connectMqtt() {
      
-    this.appsettings.SubsFlag$.subscribe(data => {
-    let path: string, protocols: any;
-    window.location.href.includes("https") ? path = "/wss" : path = "/ws";
-    window.location.href.includes("https") ? protocols = "wss" : protocols = "ws";
-    
-    console.log(data);
-    if (data) {
-    const host = '52.74.132.238';
-    const port = 9001;
-    
-    
+      this.appsettings.SubsFlag$.subscribe(data => {
+        let path: string, protocols: any;
+        window.location.href.includes("https") ? path = "/wss" : path = "/ws";
+        window.location.href.includes("https") ? protocols = "wss" : protocols = "ws";
+        
+        console.log(data);
+        if (data) {
+        const host = '52.74.132.238';
+        const port = 9001;
 
-    this.config = { hostname: host,port: port, path: path, protocol: 'ws', username: "", password: "" }
-    if (this._mqtt.clientId != '') {
-      this.connect(this.config);
-      console.log(this._mqtt.clientId);
-    }
-
-
-  }
-  }
-  ); 
+          this.config = { hostname: host,port: port, path: path, protocol: 'ws', username: "", password: "" }
+          if (this._mqtt.clientId != '') {
+            this.connect(this.config);
+            console.log(this._mqtt.clientId);
+          }
+        }
+      }
+    ); 
   }
 
 
   
   //Connection to MQTT
   connect(config: IMqttServiceOptions ): void {
-
       this._mqtt.connect(config);
-      //console.log(JSON.parse(localStorage.getItem('UpdateDataBT')).orn);
 
   }
 
@@ -120,30 +113,14 @@ export class AppComponent {
   subscribeTopic() {
     if (this.currentModuleUrl != '') {
       console.log("status", this.status);
-      // if (this.subscriptionLive != undefined) {
-      //   this.subscriptionLive.unsubscribe();
-      //   this.subscriptionLive = undefined;
-      // }
-      if (this.status === 'CONNECTED') {
-        
-        //this.SubscribeLiveMonitor();
-        this.SubscribeNotification();
-      }
-
-    } else {
-      /*if (this.subscriptionLive != undefined) {
-        this.subscriptionLive.unsubscribe();
-        this.subscriptionLive = undefined;
-      }*/
       if (this.status === 'CONNECTED') {
         this.SubscribeNotification();
-        
-        // this.SubscribeLiveMonitor();
       }
-    }
+    } 
 
   }
 
+  //Subscribing to the MQTT topic 
   SubscribeNotification() {
 
       this.subscriptionLive = this._mqtt.observe("NotificationMQTTTopic").subscribe((message: IMqttMessage) => {
@@ -224,6 +201,7 @@ export class AppComponent {
     
   }
 
+  //Alert in the UIUX when there is a notification being sent
   showAlert(header , sub , msg){
     console.log("show");
     this.alertCtrl.create({

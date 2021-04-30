@@ -11,9 +11,6 @@ import { BehaviorSubject } from 'rxjs';
 export class AppSettings {
 
     public socketData: any;
-    
-    
-    
     private socketData1 = new BehaviorSubject(this.socketData?this.socketData:' ');
     public SocketData$ = this.socketData1.asObservable();
     private subsFlag:HostInterface = {
